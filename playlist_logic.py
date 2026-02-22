@@ -31,29 +31,33 @@ def normalize_genre(genre: str) -> str:
     return genre.lower().strip()
 
 
-def normalize_song(raw: Song) -> Song:
-    """Return a normalized song dict with expected keys."""
-    title = normalize_title(str(raw.get("title", "")))
-    artist = normalize_artist(str(raw.get("artist", "")))
-    genre = normalize_genre(str(raw.get("genre", "")))
-    energy = raw.get("energy", 0)
-
+def _parse_energy(energy: object) -> int:
+    """Parse energy value from string or int."""
+    if isinstance(energy, int):
+        return energy
     if isinstance(energy, str):
         try:
-            energy = int(energy)
+            return int(energy)
         except ValueError:
-            energy = 0
+            return 0
+    return 0
 
-    tags = raw.get("tags", [])
+
+def _parse_tags(tags: object) -> List[str]:
+    """Parse tags from list or string."""
     if isinstance(tags, str):
-        tags = [tags]
+        return [tags]
+    return tags if isinstance(tags, list) else []
 
+
+def normalize_song(raw: Song) -> Song:
+    """Return a normalized song dict with expected keys."""
     return {
-        "title": title,
-        "artist": artist,
-        "genre": genre,
-        "energy": energy,
-        "tags": tags,
+        "title": normalize_title(str(raw.get("title", ""))),
+        "artist": normalize_artist(str(raw.get("artist", ""))),
+        "genre": normalize_genre(str(raw.get("genre", ""))),
+        "energy": _parse_energy(raw.get("energy", 0)),
+        "tags": _parse_tags(raw.get("tags", [])),
     }
 
 
