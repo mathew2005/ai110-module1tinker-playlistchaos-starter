@@ -167,8 +167,8 @@ def search_songs(
     filtered: List[Song] = []
 
     for song in songs:
-        value = str(song.get(field, "")).lower()
-        if value and value in q:
+        value = str(song.get(field, "")).lower().strip()
+        if value and q in value:
             filtered.append(song)
 
     return filtered
