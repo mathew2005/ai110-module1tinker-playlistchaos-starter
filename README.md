@@ -1,3 +1,6 @@
+# TF Notes 
+The core concept students needed to understand was how the app classifies and groups songs by mood based on a user profile. Testing the app and prompting the chatbot helped get more context on what was going wrong, and AI was especially helpful in understanding why an issue happened once you found it. Students are most likely to struggle with setting up the app and finding the first few bugs that make it break since all the parts are inter-dependent, if a student struggles in the first few it will be harder to recover from that. I personally struggled finding issues in the app within the given time limit in part 1. One way to guide a student without giving the answer would be to ask them what they expect the function to return, then have them print the actual output and see where it differs.
+
 # Playlist Chaos
 
 Your AI assistant tried to build a smart playlist generator. The app runs, but some of the behavior is unpredictable. Your task is to explore the app, investigate the code, and use an AI assistant to debug and improve it.
